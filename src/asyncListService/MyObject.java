@@ -26,7 +26,7 @@ public class MyObject implements IServiceListener {
 	 * Just an async operation, simulating a connection.
 	 */
 	public void connect() {
-		myService.connect();
+		myService.connect(id);
 	}
 
 	/**

@@ -8,7 +8,8 @@ public class MyService implements IService {
 
 	private IServiceListener listener;
 	private long time;
-
+	private int objectId;
+	
 	/**
 	 * Sets the service event listener.
 	 * @param the listener.
@@ -19,7 +20,8 @@ public class MyService implements IService {
 	}
 
 	@Override
-	public void connect() {
+	public void connect(int itemId) {
+		objectId = itemId;
 		startAsync(() -> {
 			time = listener.onRetreiveTime();
 			Thread.sleep(time);
@@ -46,7 +48,8 @@ public class MyService implements IService {
 	public void disconnect() {
 		startAsync(() -> {
 			listener.onStatusChange("Desconectando...");
-			Thread.sleep(3000);
+			long timeToDisconnect = (objectId == 5) ? 22000 : 3000;
+			Thread.sleep(timeToDisconnect);
 			listener.onStatusChange("Desconectado.");
 		});
 	}
