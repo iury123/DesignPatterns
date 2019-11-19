@@ -11,7 +11,7 @@ interface EntryView {
 }
 
 /**
- * Simulates a view, show the list of objects on console.
+ * Simulates a view, show the list of objects and its results on console.
  * @author iurymiguel
  *
  */
@@ -46,7 +46,7 @@ public class MyView implements IMyObjectListener, EntryView {
 		
 		MyObject obj4 = new MyObject();
 		obj4.id = 4;
-		obj4.time = 20000;
+		obj4.time = 15000;
 		obj4.listener = this;
 		obj4.name = "Objeto 4";
 		obj4.status = "Ready!";
@@ -69,40 +69,35 @@ public class MyView implements IMyObjectListener, EntryView {
 	 * Prints all objects of the list.
 	 */
 	private void printAllObjects() {
-		myObjects.forEach((obj) -> System.out.println(obj));
+		myObjects.forEach(obj -> System.out.println(obj));
 	}
 	
 	/**
 	 * Clears the console.
 	 */
 	private void clear() {
-		for (int i = 0; i < 20; ++i) {
+		for (int i = 0; i < 20; i++) {
 			System.out.println();  
 		}
 	}
 
 	/**
-	 * Starts the system the system.
+	 * Starts the system.
 	 */
 	@Override
 	public void start() {
 		myObjects = new ArrayList<MyObject>();
 		initList();
 		printAllObjects();
-		myObjects.forEach((obj) -> obj.connect());
+		myObjects.forEach(obj -> obj.connect());
 	}
 
 	/**
 	 * This callback must be synchronized for being a resource used by several threads.
-	 * Here, the values are updated and the list is shown.
+	 * Here, the console is cleared and the updated list is shown.
 	 */
 	@Override
 	synchronized public void onStatusChange(int id, String status) {
-		myObjects.forEach((obj) -> {
-			if(obj.id == id) {
-				obj.status = status;
-			}
-		});
 		clear();
 		printAllObjects();
 	}

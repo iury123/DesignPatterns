@@ -7,6 +7,7 @@ interface IStartAsyncCallback {
 public class MyService implements IService {
 
 	private IServiceListener listener;
+	private long time;
 
 	/**
 	 * Sets the service event listener.
@@ -20,7 +21,7 @@ public class MyService implements IService {
 	@Override
 	public void connect() {
 		startAsync(() -> {
-			long time = listener.onRetreiveTime();
+			time = listener.onRetreiveTime();
 			Thread.sleep(time);
 			listener.onStatusChange("Conectando...");
 			Thread.sleep(time * 2);
@@ -33,10 +34,9 @@ public class MyService implements IService {
 	@Override
 	public void read() {
 		startAsync(() -> {
-			long time = listener.onRetreiveTime();
 			listener.onStatusChange("Lendo...");
 			Thread.sleep(time);
-			listener.onStatusChange("Leitura Finalizada");
+			listener.onStatusChange("Leitura Finalizada.");
 			Thread.sleep(7000);
 			disconnect();
 		});
@@ -51,7 +51,11 @@ public class MyService implements IService {
 		});
 	}
 
-
+	/**
+	 * Starts an async operation.
+	 * @param callback the callback to be called in another thread.
+	 * Its contains some operation to be executed.
+	 */
 	private void startAsync(IStartAsyncCallback callback) {
 		new Thread(() -> {
 			try {
