@@ -3,7 +3,7 @@ package asyncListService;
 import java.util.ArrayList;
 
 /**
- * Just an interface for Main class not having visiblity of other methods.
+ * Just an interface for Main class not having visibility of other methods.
  * @author iurymiguel
  */
 interface EntryView {

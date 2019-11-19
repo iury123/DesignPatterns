@@ -7,8 +7,8 @@ package asyncListService;
 public interface IService {
 	
 	/**
-	 * Sets a listener which will be listening to events in the service class.
-	 * @param listener the listener object.
+	 * Sets a listener which will be listening to events which happens in the service class.
+	 * @param listener the listener instance.
 	 */
 	void setListener(IServiceListener listener);
 	
