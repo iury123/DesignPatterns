@@ -14,7 +14,7 @@ public interface IService {
 	
 	/**
 	 * Just an async operation, simulating a connection.
-	 * @param the id of a the item of the list.
+	 * @param the id of a item of the list.
 	 */
 	void connect(int itemId);
 	
